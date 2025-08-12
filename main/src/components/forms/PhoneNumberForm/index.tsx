@@ -41,7 +41,7 @@ export function PhoneNumberForm({ onSubmit }: PhoneNumberFormProps) {
   };
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="w-full flex flex-col gap-4 mb-5">
       <Button className="w-full max-w-xs h-11 mx-auto flex items-center justify-center gap-2 bg-[#D9D9D9] text-black border-0 rounded-2xl text-base font-medium hover:bg-gray-300">
         ورود با گوگل <Image src={GoogleIcon} alt="Google" className="w-5 h-5" />
       </Button>

@@ -42,7 +42,7 @@ export function OtpForm({ onBack, onComplete }: OtpFormProps) {
   }
 
   return (
-    <div className="w-full flex flex-col gap-4 items-center">
+    <div className="w-full flex flex-col gap-4 items-center mb-5">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -81,7 +81,11 @@ export function OtpForm({ onBack, onComplete }: OtpFormProps) {
           </div>
         </form>
       </Form>
-      <Button variant="link" onClick={onBack} className="text-white">
+      <Button
+        variant="link"
+        onClick={onBack}
+        className="text-white cursor-pointer hover:underline mb-3"
+      >
         تغییر شمارۀ موبایل
       </Button>
     </div>

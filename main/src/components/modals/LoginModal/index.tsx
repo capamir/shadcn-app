@@ -76,7 +76,7 @@ export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
             />
           )}
 
-          <p className="text-xs text-[#8e8e93] leading-relaxed mt-auto sm:pt-6">
+          <p className="text-xs text-[#8e8e93] leading-relaxed pt-6">
             با ورود به پرسا ای آی، شما
             <a
               href="/contactUs"
