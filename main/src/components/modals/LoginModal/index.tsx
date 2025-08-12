@@ -15,8 +15,10 @@ import {
 import Logo from "@/assets/Logo.svg";
 import { PhoneNumberForm } from "@/components/forms/PhoneNumberForm";
 import { OtpForm } from "@/components/forms/OtpForm";
+import { EmailForm } from "@/components/forms/EmailForm";
+import { EmailConfirmation } from "@/components/forms/EmailConfirmation";
 
-type ModalView = "phone" | "otp";
+type ModalView = "phone" | "otp" | "email" | "emailConfirmation";
 
 interface LoginModalProps {
   isOpen: boolean;
@@ -26,6 +28,7 @@ interface LoginModalProps {
 export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
   const [view, setView] = React.useState<ModalView>("phone");
   const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [submittedEmail, setSubmittedEmail] = React.useState("");
 
   React.useEffect(() => {
     if (isOpen) {
@@ -38,12 +41,34 @@ export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
     setView("otp");
   };
 
-  const handleBackToPhone = () => {
-    setView("phone");
+  const handleEmailSubmit = (email: string) => {
+    setSubmittedEmail(email);
+    setView("emailConfirmation");
   };
+
+  const handleBackToPhone = () => setView("phone");
+  const handleGoToEmail = () => setView("email");
+  const handleBackToEmail = () => setView("email");
 
   const handleOtpComplete = () => {
     onOpenChange(false);
+  };
+
+  const getTitle = () => {
+    if (view === "emailConfirmation") return "!ایمیلتو چک کن تا وارد بشی";
+    return "پرسا ای‌آی";
+  };
+
+  const getDescription = () => {
+    switch (view) {
+      case "otp":
+        return `کد تایید ارسال شده به شمارۀ ${phoneNumber} را وارد کنید`;
+      case "email":
+        return "آدرس ایمیل خودتون رو وارد کنید";
+      case "phone":
+      default:
+        return "پرسا همه کاراتو انجام میده";
+    }
   };
 
   return (
@@ -56,36 +81,55 @@ export function LoginModal({ isOpen, onOpenChange }: LoginModalProps) {
             </button>
           </DialogClose>
 
-          <DialogHeader className="items-center text-center">
-            <Image src={Logo} alt="Logo" width={65} height={65} />
-            <DialogTitle className="text-xl font-bold mb-3">
-              پرسا ای‌آی
-            </DialogTitle>
-            <DialogDescription className="text-lg text-white max-w-[15.25rem] mx-auto mb-6 font-normal">
-              {view === "otp"
-                ? `کد تایید ارسال شده به شمارۀ ${phoneNumber} را وارد کنید`
-                : "پرسا همه کاراتو انجام میده"}
-            </DialogDescription>
-          </DialogHeader>
+          {view !== "emailConfirmation" && (
+            <DialogHeader className="items-center text-center">
+              <Image src={Logo} alt="Logo" width={73} height={65} />
+              <DialogTitle className="text-xl font-bold mb-3">
+                {getTitle()}
+              </DialogTitle>
+              <DialogDescription className="text-lg text-white max-w-[15.25rem] mx-auto mb-6 font-normal">
+                {getDescription()}
+              </DialogDescription>
+            </DialogHeader>
+          )}
 
-          {view === "phone" && <PhoneNumberForm onSubmit={handlePhoneSubmit} />}
+          {view === "phone" && (
+            <PhoneNumberForm
+              onSubmit={handlePhoneSubmit}
+              onGoToEmail={handleGoToEmail}
+            />
+          )}
           {view === "otp" && (
             <OtpForm
               onBack={handleBackToPhone}
               onComplete={handleOtpComplete}
             />
           )}
+          {view === "email" && (
+            <EmailForm
+              onSubmit={handleEmailSubmit}
+              onBack={handleBackToPhone}
+            />
+          )}
+          {view === "emailConfirmation" && (
+            <EmailConfirmation
+              submittedEmail={submittedEmail}
+              onBack={handleBackToEmail}
+            />
+          )}
 
-          <p className="text-xs text-[#8e8e93] leading-relaxed pt-6">
-            با ورود به پرسا ای آی، شما
-            <a
-              href="/contactUs"
-              className="text-[#f0f0f0] px-1 hover:underline"
-            >
-              قوانین و مقررات
-            </a>
-            استفاده را می‌پذیرید
-          </p>
+          {view !== "emailConfirmation" && (
+            <p className="text-xs text-[#8e8e93] leading-relaxed ">
+              با ورود به پرسا ای آی، شما
+              <a
+                href="/contactUs"
+                className="text-[#f0f0f0] px-1 hover:underline"
+              >
+                قوانین و مقررات
+              </a>
+              استفاده را می‌پذیرید
+            </p>
+          )}
         </div>
       </DialogContent>
     </Dialog>
