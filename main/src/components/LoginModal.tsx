@@ -13,10 +13,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import Logo from "@/assets/Logo.svg";
-import { PhoneNumberForm } from "@/components/forms/PhoneNumberForm";
-import { OtpForm } from "@/components/forms/OtpForm";
-import { EmailForm } from "@/components/forms/EmailForm";
-import { EmailConfirmation } from "@/components/forms/EmailConfirmation";
+import { PhoneNumberForm } from "@/components/PhoneNumberForm";
+import { OtpForm } from "@/components/OtpForm";
+import { EmailForm } from "@/components/EmailForm";
+import { EmailConfirmation } from "@/components/EmailConfirmation";
 
 type ModalView = "phone" | "otp" | "email" | "emailConfirmation";
 

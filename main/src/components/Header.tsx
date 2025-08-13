@@ -2,7 +2,7 @@
 "use client";
 
 import * as React from "react";
-import { LoginModal } from "@/components/modals/LoginModal";
+import { LoginModal } from "@/components/LoginModal";
 import { Button } from "@/components/ui/button";
 
 /**

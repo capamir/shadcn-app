@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 // The next/font import has been removed to fix the Turbopack issue.
 import "./globals.css";
 
-import { ThemeProvider } from "@/providers/ThemeProvider";
-import { Header } from "@/components/layout/Header";
+import { Header } from "@/components/Header";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "Finance Tracker",
