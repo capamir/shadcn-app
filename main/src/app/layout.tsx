@@ -1,9 +1,7 @@
 // main/src/app/layout.tsx
 import type { Metadata } from "next";
-// The next/font import has been removed to fix the Turbopack issue.
 import "./globals.css";
 
-import { Header } from "@/components/Header";
 import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
@@ -38,8 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <main className="container py-8">{children}</main>
+          {children}
         </ThemeProvider>
       </body>
     </html>
